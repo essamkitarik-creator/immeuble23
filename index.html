@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.json"><meta name="theme-color" content="#c0603a"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="العمارة 23"><link rel="apple-touch-icon" href="icon-192.png">
+<title>المجمع العقاري البيضاء · العمارة 23</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+<style>
+:root{--bg:#fbf3e8;--cd:rgba(255,251,245,.74);--fg:#3b2418;--mu:#8a6a58;--ln:#ecd9c4;--t:#c0603a;--am:#d9902b;--go:#b8975a;--ok:#4f8a5b;--bad:#b83a3a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d130e;--cd:rgba(46,31,23,.74);--fg:#f6e8d8;--mu:#c9a78d;--ln:#4a3426;--t:#e07a52;--am:#f0b04a;--go:#d6b878;--ok:#78c08a;--bad:#ef7676}}
+:root[data-theme="dark"]{--bg:#1d130e;--cd:rgba(46,31,23,.74);--fg:#f6e8d8;--mu:#c9a78d;--ln:#4a3426;--t:#e07a52;--am:#f0b04a;--go:#d6b878;--ok:#78c08a;--bad:#ef7676}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box;margin:0}
+body{background:radial-gradient(700px 420px at 90% -5%,color-mix(in srgb,var(--am) 26%,transparent),transparent),radial-gradient(600px 400px at 0% 20%,color-mix(in srgb,var(--t) 18%,transparent),transparent),var(--bg);color:var(--fg);font:500 15px/1.65 Tajawal,Tahoma,sans-serif;min-height:100vh;min-height:100dvh;padding:14px 12px 40px}
+#fs{position:fixed;top:calc(6px + env(safe-area-inset-top,0px));left:6px;width:34px;height:34px;border-radius:50%;border:1px solid var(--go);background:var(--cd);color:var(--fg);z-index:40;opacity:0;transition:opacity .4s;font-size:16px;line-height:1;cursor:pointer;backdrop-filter:blur(8px)}#fs.s,#fs:hover{opacity:1}@media(display-mode:fullscreen),(display-mode:standalone){#fs{display:none}}
+.w{max-width:none;margin:0;width:100%}h1{font-size:clamp(20px,4.5vw,30px);font-weight:800}h2{font-size:18px;margin-bottom:8px;color:var(--t)}
+.sub{color:var(--mu);font-size:13px}
+.gl{background:var(--cd);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--ln);border-radius:20px;padding:16px;margin:12px 0;box-shadow:0 10px 30px -18px var(--t)}
+.top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.gn{position:relative;display:flex;gap:2px;padding:6px;border-radius:999px;background:color-mix(in srgb,var(--cd) 70%,transparent);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);border:1px solid color-mix(in srgb,#fff 40%,var(--ln));box-shadow:0 12px 30px -16px var(--t),inset 0 1px 0 rgba(255,255,255,.5);overflow-x:auto;margin:10px 0;scrollbar-width:none}.gn::-webkit-scrollbar{display:none}
+.gi{position:absolute;top:6px;bottom:6px;left:0;width:0;border-radius:999px;background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(255,236,214,.88));box-shadow:0 6px 16px -8px var(--t),inset 0 1px 0 #fff;transition:transform .4s cubic-bezier(.3,1.3,.5,1),width .4s;z-index:0}
+.gt{position:relative;z-index:1;font:inherit;font-size:14px;display:flex;align-items:center;gap:6px;padding:9px 16px;border:0;background:transparent;color:var(--mu);border-radius:999px;cursor:pointer;white-space:nowrap;transition:color .25s}.gt.on{color:#3b2418;font-weight:700}
+.bg{position:absolute;top:1px;inset-inline-start:3px;font-style:normal;background:var(--bad);color:#fff;font-size:10.5px;min-width:17px;height:17px;border-radius:99px;display:grid;place-items:center;padding:0 4px;font-weight:700}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .gi{background:rgba(255,255,255,.2);box-shadow:0 6px 16px -8px #000,inset 0 1px 0 rgba(255,255,255,.35)}:root:not([data-theme="light"]) .gt.on{color:#fff}}
+@media(max-width:640px){.gn{position:fixed;inset-inline:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));margin:0;z-index:15;justify-content:space-between}.gt{padding:10px 12px}.gt .lb{display:none}.gt.on .lb{display:inline}body{padding-bottom:100px}}
+.b{font:inherit;font-size:14px;cursor:pointer;padding:8px 16px;border-radius:999px;border:1.5px solid var(--go);background:transparent;color:var(--fg);white-space:nowrap}
+.b.on,.b.p{background:linear-gradient(135deg,var(--t),var(--am));border-color:transparent;color:#fff;box-shadow:0 6px 16px -8px var(--t)}
+.b.d{border-color:var(--bad);color:var(--bad)}.b.s{padding:4px 11px;font-size:12.5px}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:12px 0}a.b{text-decoration:none;display:inline-block}.an{border-inline-start:5px solid var(--t);padding:10px 14px;margin:10px 0;background:color-mix(in srgb,var(--am) 8%,transparent);border-radius:12px}.nt{border:2px solid #7a4a2a;padding:22px;margin:0 0 14px;color:#2a160c;background:#fff;page-break-after:always;line-height:1.9;font-family:Tajawal,Tahoma,sans-serif}.nt h2{text-align:center;color:#a0482a}.nt td,.nt th{border:1px solid #c9a98a;color:#2a160c;padding:6px 8px;white-space:normal}.sg{display:flex;justify-content:space-between;margin-top:34px}
+.k{--c:var(--t);background:var(--cd);border:1px solid var(--ln);border-top:4px solid var(--c);border-radius:16px;padding:14px}
+.k b{display:block;font-size:22px;color:var(--c);font-weight:800}.k span{color:var(--mu);font-size:13px}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:14px}
+th{color:var(--mu);text-align:right;padding:8px;border-bottom:2px solid var(--go)}td{padding:8px;border-bottom:1px solid var(--ln);white-space:nowrap}
+.st{padding:2px 11px;border-radius:99px;font-size:12.5px;border:1.5px solid var(--c);color:var(--c)}
+.paid,.ok{--c:var(--ok)}.late,.bad{--c:var(--bad)}.pending,.wn{--c:var(--am)}
+input,select,textarea{font:inherit;padding:10px 12px;border-radius:12px;border:1.5px solid var(--ln);background:var(--bg);color:var(--fg);width:100%;min-width:0}
+input:focus,select:focus{outline:2px solid var(--am)}
+.fr{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end;margin:8px 0}
+label{font-size:13px;color:var(--mu);display:block}
+.cv{position:relative;height:250px}.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+#md{position:fixed;inset:0;background:rgba(30,15,8,.55);display:none;align-items:center;justify-content:center;padding:14px;z-index:20}
+#md.on{display:flex}#md>div{background:var(--bg);border-radius:20px;padding:18px;max-width:560px;width:100%;max-height:90vh;overflow:auto;border:1px solid var(--go)}
+.stp{display:flex;gap:6px;margin-bottom:12px}.stp i{flex:1;height:6px;border-radius:9px;background:var(--ln)}.stp i.on{background:var(--t)}
+.msg{color:var(--bad);font-size:13.5px;min-height:20px}
+.lg{max-width:430px;margin:8vh auto 0;text-align:center}.lg input{margin:6px 0}
+#pr{display:none}
+.rc{border:3px solid #5b6aa0;border-radius:10px;padding:14px 18px;margin:0;color:#2b3560;background:#fff;page-break-inside:avoid;min-height:8.2cm;font-family:Tajawal,Tahoma,sans-serif;display:flex;flex-direction:column;justify-content:space-between}
+.rc h3{text-align:center;color:#5b6aa0;font-size:26px;margin:2px 0}
+.cut{position:relative;height:0;border-top:2px dashed #444;margin:14px 0}.cut::before{content:"✂";position:absolute;top:-14px;inset-inline-start:10px;background:#fff;padding:0 6px;font-size:18px;color:#222}.cut::after{content:"قص هنا · Découper ici";position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#fff;padding:0 10px;font-size:11px;color:#444;white-space:nowrap}
+.rr{display:flex;gap:8px;align-items:baseline}.rr i{font-style:normal;color:#5b6aa0;white-space:nowrap}
+.rr .v{flex:1;border-bottom:1px solid #aeb5d4;padding:0 6px;font-weight:700;min-height:1.4em}
+.rt{justify-content:space-between}.rt .g{display:flex;gap:6px;align-items:baseline}.rt .v{flex:none;min-width:90px;text-align:center}
+.rf{justify-content:space-between;align-items:flex-end}.stamp{color:#5b6aa0;font-weight:700;text-align:center;line-height:1.5;border:1.5px dashed #aeb5d4;padding:4px 10px;border-radius:6px}
+@media print{@page{size:A4;margin:10mm}.pg{page-break-after:always}.pg:last-child{page-break-after:auto}body>*:not(#pr){display:none!important}#pr{display:block!important}body{background:#fff;padding:0}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<button id="fs" aria-label="ملء الشاشة">⛶</button><div class="w" id="app"></div><div id="md"><div id="mb"></div></div><div id="pr"></div>
+<script src="core.js"></script>
+<script src="v-sum.js"></script>
+<script src="v-pay.js"></script>
+<script src="v-own.js"></script>
+<script src="v-set.js"></script>
+<script src="v-misc.js"></script>
+<script src="vote.js"></script>
+<script src="tre.js"></script>
+<script src="rcp.js"></script>
+<script src="dl.js"></script>
+<script src="ann.js"></script>
+<script src="legal.js"></script>
+<script src="pdf.js"></script>
+<script>
+function toggleFs(){const d=document,el=d.documentElement;if(d.fullscreenElement||d.webkitFullscreenElement){(d.exitFullscreen||d.webkitExitFullscreen).call(d)}else{const f=el.requestFullscreen||el.webkitRequestFullscreen;if(f){try{const r=f.call(el);if(r&&r.catch)r.catch(()=>{})}catch(_){}}else alert('على iPhone: اضغط زر المشاركة ثم «إضافة إلى الشاشة الرئيسية» لفتح التطبيق بملء الشاشة دون شريط الرابط.')}}
+(()=>{const b=document.getElementById('fs');let t,sk=false;const show=()=>{b.classList.add('s');clearTimeout(t);t=setTimeout(()=>b.classList.remove('s'),2800)};
+b.addEventListener('pointerdown',()=>{if(+getComputedStyle(b).opacity<.5)sk=true;show()});
+b.addEventListener('click',()=>{if(sk){sk=false;return}toggleFs();setTimeout(()=>b.classList.remove('s'),1200)});
+document.addEventListener('fullscreenchange',()=>b.classList.remove('s'));show();
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})})();
+(async()=>{try{const{data}=await SB.auth.getSession();if(data.session)await enter(data.session)}catch(_){}render()})();
+</script></body></html>

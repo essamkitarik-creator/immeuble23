@@ -1,0 +1,6 @@
+const rvTot=id=>[1,2,3].map(c=>+((S.rvt.find(t=>t.repair_id===id&&t.choice===c)||{}).c||0));
+function voteForm(id){const x=S.reps.find(r=>r.id===id),adm=role()==='admin',my=S.rv.find(v=>v.repair_id===id&&v.apt===myN());
+if(!adm&&!x.vote_open)return alert('انتهى التصويت على هذا الإصلاح');
+modal(`<h2>🗳️ التصويت · ${e(x.type)}</h2><p class="sub">${e(x.desc)}</p><div class="fr">${adm?`<div><label>رقم الشقة</label><select id="va">${oOpts()}</select></div>`:`<div><label>الشقة</label><input value="${myN()}" disabled></div>`}<div><label>رقم التصويت (الخيار)</label><select id="vc">${[1,2,3].map(i=>`<option value="${i}" ${my&&my.choice===i?'selected':''}>${i} · ${e(x['opt'+i])}</option>`).join('')}</select></div></div><p class="msg" id="mm"></p><button class="b p" onclick="voteSave(${id})">تسجيل التصويت</button> <button class="b" onclick="closeM()">إلغاء</button>`)}
+async function voteSave(id){const adm=role()==='admin',apt=adm?+$('#va').value:myN(),choice=+$('#vc').value;await Q(SB.from('repair_votes').upsert({repair_id:id,apt,choice},{onConflict:'repair_id,apt'}));closeM();await reload();render()}
+async function voteToggle(id){const x=S.reps.find(r=>r.id===id);await Q(SB.from('repairs').update({vote_open:!x.vote_open}).eq('id',id));await reload();render()}

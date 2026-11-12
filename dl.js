@@ -1,0 +1,6 @@
+async function dlf(name,data){if(/\.html$/i.test(name))return mkPdf(`<div class="dc">${data.replace(/^[\s\S]*?<body>/i,'').replace(/<\/body>[\s\S]*$/i,'')}</div>`,name.replace(/\.html$/i,'.pdf'));let d=null;try{d=window.claude&&await claude.use('downloads')}catch(_){}if(d){try{await d.save({filename:name,data})}catch(_){}return}const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data]));a.download=name;a.click()}
+const csv=rows=>'\uFEFF'+rows.map(r=>r.map(c=>`"${String(c??'').replace(/"/g,'""')}"`).join(',')).join('\r\n');
+function dlOwn(n){if(role()!=='admin')n=myN();const os=n?S.owners.filter(o=>o.n===n):S.owners,rows=[['الشقة','المالك','البريد','الهاتف','دين سابق أصلي','دين سابق مسدد','دين سابق متبقٍ','اشتراكات مدفوعة','مستحقات حالية (اشتراكات غير مؤداة)']];
+os.forEach(o=>{const s=OS(o);rows.push([o.n,o.name,role()==='admin'?(o.contact_email||''):'',role()==='admin'?(o.phone||''):'',o.d0,s.dp,s.dl,s.pd,s.late])});
+rows.push([],['الشقة','المالك','الشهر','النوع','المبلغ','التاريخ','الحالة']);S.pays.filter(p=>os.some(o=>o.n===p.n)).sort((a,b)=>a.n-b.n).forEach(p=>rows.push([p.n,oname(p.n),p.m!==null?M[p.m]:'',TY[p.type],p.amt,p.date,ST[p.st]]));
+dlf(n?`معطيات_شقة_${n}.csv`:'معطيات_جميع_الملاك.csv',csv(rows))}
